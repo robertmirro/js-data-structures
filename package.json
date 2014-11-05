@@ -1,0 +1,27 @@
+{
+  "name": "js-data-structures",
+  "version": "1.0.0",
+  "description": "JS Data Structures",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertmirro/js-data-structures.git"
+  },
+  "author": "Robert Mirro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robertmirro/js-data-structures/issues"
+  },
+  "homepage": "https://github.com/robertmirro/js-data-structures",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "mocha": "^2.0.1",
+    "sinon": "^1.11.1"
+  }
+}
