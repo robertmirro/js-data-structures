@@ -26,6 +26,7 @@ describe( 'LinkedList' , function () {
             expect( linkedList.first() ).to.equal( null );
             expect( linkedList.last() ).to.equal( null );
             expect( linkedList.current() ).to.equal( null );
+            expect( linkedList.toArray() ).to.eql( [] );
         });
     });
 });
