@@ -1,7 +1,17 @@
-;(function ( global ) {
+;(function ( global , factory ) {
+    if ( typeof define === 'function' && define.amd ) {
+        define( [ 'jquery' ] , factory );
+    } else if ( typeof exports === 'object' ) {
+        module.exports = factory();
+    } else {
+        global.LinkedList = factory();
+    }
+})( this , function factory() {
     'use strict';
-    console.clear();
-
+    //console.clear();
+    
+    return LinkedList;    
+    
     function LinkedList( datum , addNodeLast ) {
         var
             _head = null ,
@@ -253,8 +263,5 @@
             return _typeOf( fn ) === _typeOf( function(){} );
         }
     }
-
-    global.LinkedList = LinkedList;
-
-})( typeof window !== 'undefined' ? window : this );
+});
 
