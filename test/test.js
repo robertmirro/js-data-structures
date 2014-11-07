@@ -103,10 +103,8 @@ describe( 'LinkedList' , function () {
         });
         
         it( 'remove single item, empty all items' , function () {
-            var nodeValue = 'first';
+            var nodeValue = 'remove';
             expect( linkedList.add( nodeValue ) ).to.eql( linkedList );
-            expect( linkedList ).to.have.property( 'size' , 1 );
-            expect( linkedList ).to.have.property( 'isEmpty' , false );
             
             linkedList.remove( 'some value' );
             expect( linkedList ).to.have.property( 'size' , 1 );
