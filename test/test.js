@@ -51,9 +51,9 @@ describe( 'LinkedList' , function () {
 //    'forEach'       : { 'value' : forEachNode , 'enumerable' : true , 'configurable' : false , 'writable' : false }
         
         
-        it( 'manually add single item, should be an object with a single list item' , function () {
-            var nodeValue = 'one'
-            linkedList.add( nodeValue );
+        it( 'manually add single item first' , function () {
+            var nodeValue = 'first';
+            expect( linkedList.add( nodeValue ) ).to.eql( linkedList );
             
             expect( linkedList ).to.have.property( 'size' , 1 );
             expect( linkedList ).to.have.property( 'isEmpty' , false );
@@ -67,10 +67,39 @@ describe( 'LinkedList' , function () {
             linkedList.first();  // set value of current() for next()
             expect( linkedList.next() ).to.equal( null );
             expect( linkedList.get( nodeValue ).value ).to.equal( nodeValue );
+            expect( linkedList.get( 'some value' ) ).to.equal( null );
             expect( linkedList.getAt( 0 ).value ).to.equal( nodeValue );
+            expect( linkedList.getAt( 1 ) ).to.equal( null );
             expect( linkedList.toArray() ).to.eql( [ nodeValue ] );
         });
 
+        it( 'manually add single item last' , function () {
+            var nodeValue = 'last';
+            expect( linkedList.addLast( nodeValue ) ).to.eql( linkedList );
+            
+            expect( linkedList ).to.have.property( 'size' , 1 );
+            expect( linkedList ).to.have.property( 'isEmpty' , false );
+            expect( linkedList.first().value ).to.equal( nodeValue );
+            expect( linkedList.first().next() ).to.equal( null );
+            expect( linkedList.last().value ).to.equal( nodeValue );
+            expect( linkedList.last().next() ).to.equal( null );
+            linkedList.first();  // set value of current()
+            expect( linkedList.current().value ).to.equal( nodeValue );
+            expect( linkedList.current().next() ).to.equal( null );
+            linkedList.first();  // set value of current() for next()
+            expect( linkedList.next() ).to.equal( null );
+            expect( linkedList.get( nodeValue ).value ).to.equal( nodeValue );
+            expect( linkedList.get( 'some value' ) ).to.equal( null );
+            expect( linkedList.getAt( 0 ).value ).to.equal( nodeValue );
+            expect( linkedList.getAt( 1 ) ).to.equal( null );
+            expect( linkedList.toArray() ).to.eql( [ nodeValue ] );
+        });
+        
+            
+            
+        
+        
+        
         it( 'add single item, should be an object with a single list item' , function () {
             expect( linkedList ).to.have.property( 'size' , 0 );
         });
