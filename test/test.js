@@ -61,16 +61,20 @@ describe( 'LinkedList' , function () {
             expect( linkedList.first().next() ).to.equal( null );
             expect( linkedList.last().value ).to.equal( nodeValue );
             expect( linkedList.last().next() ).to.equal( null );
+
             linkedList.first();  // set value of current()
             expect( linkedList.current().value ).to.equal( nodeValue );
             expect( linkedList.current().next() ).to.equal( null );
+            
             linkedList.first();  // set value of current() for next()
             expect( linkedList.next() ).to.equal( null );
+            
             expect( linkedList.get( nodeValue ).value ).to.equal( nodeValue );
             expect( linkedList.get( 'some value' ) ).to.equal( null );
             expect( linkedList.getAt( 0 ).value ).to.equal( nodeValue );
             expect( linkedList.getAt( 1 ) ).to.equal( null );
             expect( linkedList.toArray() ).to.eql( [ nodeValue ] );
+
         });
 
         it( 'manually add single item last' , function () {
@@ -83,11 +87,14 @@ describe( 'LinkedList' , function () {
             expect( linkedList.first().next() ).to.equal( null );
             expect( linkedList.last().value ).to.equal( nodeValue );
             expect( linkedList.last().next() ).to.equal( null );
+            
             linkedList.first();  // set value of current()
             expect( linkedList.current().value ).to.equal( nodeValue );
             expect( linkedList.current().next() ).to.equal( null );
+            
             linkedList.first();  // set value of current() for next()
             expect( linkedList.next() ).to.equal( null );
+            
             expect( linkedList.get( nodeValue ).value ).to.equal( nodeValue );
             expect( linkedList.get( 'some value' ) ).to.equal( null );
             expect( linkedList.getAt( 0 ).value ).to.equal( nodeValue );
@@ -95,13 +102,35 @@ describe( 'LinkedList' , function () {
             expect( linkedList.toArray() ).to.eql( [ nodeValue ] );
         });
         
+        it( 'remove single item, empty all items' , function () {
+            var nodeValue = 'first';
+            expect( linkedList.add( nodeValue ) ).to.eql( linkedList );
+            expect( linkedList ).to.have.property( 'size' , 1 );
+            expect( linkedList ).to.have.property( 'isEmpty' , false );
             
-            
-        
-        
-        
-        it( 'add single item, should be an object with a single list item' , function () {
+            linkedList.remove( 'some value' );
+            expect( linkedList ).to.have.property( 'size' , 1 );
+            expect( linkedList ).to.have.property( 'isEmpty' , false );
+
+            linkedList.remove( nodeValue );
             expect( linkedList ).to.have.property( 'size' , 0 );
+            expect( linkedList ).to.have.property( 'isEmpty' , true );
+
+            expect( linkedList.add( nodeValue ) ).to.eql( linkedList );
+
+            linkedList.removeAt( 1 );
+            expect( linkedList ).to.have.property( 'size' , 1 );
+            expect( linkedList ).to.have.property( 'isEmpty' , false );
+
+            linkedList.removeAt( 0 );
+            expect( linkedList ).to.have.property( 'size' , 0 );
+            expect( linkedList ).to.have.property( 'isEmpty' , true );
+
+            expect( linkedList.add( nodeValue ) ).to.eql( linkedList );
+
+            expect( linkedList.empty() ).to.eql( linkedList );
+            expect( linkedList ).to.have.property( 'size' , 0 );
+            expect( linkedList ).to.have.property( 'isEmpty' , true );
         });
         
     });
