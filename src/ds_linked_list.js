@@ -19,6 +19,7 @@
             _current = null,
             _length = 0,
             _typeOf = Function.call.bind(Object.prototype.toString),
+
             linkedList = Object.create(Object.prototype, {
                 'size': {
                     'get': size,
