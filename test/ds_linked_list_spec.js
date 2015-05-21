@@ -52,6 +52,11 @@ describe('LinkedList', function() {
         //    'forEach'       : { 'value' : forEachNode , 'enumerable' : true , 'configurable' : false , 'writable' : false }
 
 
+        function bob() {
+            var a, b;
+            return a == b;
+        }
+
         it('manually add single item first', function() {
             var nodeValue = 'first';
             expect(linkedList.add(nodeValue)).to.eql(linkedList);
