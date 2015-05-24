@@ -11,6 +11,8 @@
     'use strict';
     //console.clear();
 
+    var _typeOf = typeOf();
+
     return LinkedList;
 
     function LinkedList(datum, addNodeLast) {
@@ -18,7 +20,6 @@
             _tail = null,
             _current = null,
             _length = 0,
-            _typeOf = Function.call.bind(Object.prototype.toString),
 
             linkedList = Object.create(Object.prototype, {
                 'size': {
@@ -160,7 +161,7 @@
         }
 
         function next() {
-            return (_current = _current ? _current.next() : null);
+            return (_current = (_current ? _current.next() : null));
         }
 
         function get(value) {
@@ -181,7 +182,7 @@
         }
 
         function getNodeByIndex(index) {
-            if (isNumeric(index) && index >= 0 && index <= lastNodeIndex()) {
+            if (isNumber(index) && index >= 0 && index <= lastNodeIndex()) {
                 return forEachNode(function(nodeValue, nodeIndex, node) {
                     return nodeIndex === index;
                 });
@@ -226,7 +227,7 @@
         function addAt(index, data) {
             var nodeBefore, nodeAfter, nodeToAdd;
 
-            if (isNumeric(index)) {
+            if (isNumber(index)) {
                 if (index <= 0 || isEmpty()) {
                     addFirst(data);
                 } else if (index > lastNodeIndex()) {
@@ -258,7 +259,7 @@
         function removeNode(removeBy, removeMethod) {
             var nodeBefore, nodeToDelete, nodeIndexToDelete;
 
-            if ((removeMethod === 'value' && removeBy != null) || (removeMethod === 'index' && isNumeric(removeBy) && removeBy >= 0 && removeBy <= lastNodeIndex()) || (removeMethod === 'node' && removeBy != null)) {
+            if ((removeMethod === 'value' && removeBy != null) || (removeMethod === 'index' && isNumber(removeBy) && removeBy >= 0 && removeBy <= lastNodeIndex()) || (removeMethod === 'node' && removeBy != null)) {
                 nodeToDelete = forEachNode(function(nodeValue, nodeIndex, node) {
                     return (removeMethod === 'value' && nodeValue === removeBy) || (removeMethod === 'index' && nodeIndex === removeBy) || (removeMethod === 'node' && node === removeBy) ? (nodeIndexToDelete = nodeIndex, true) : false;
                 });
@@ -282,7 +283,7 @@
             var array = [];
 
             forEachNode(function(nodeValue, nodeIndex, node) {
-                return array.push(nodeValue), false; // force iteration of all nodes
+                return array.push(nodeValue), false;  /* force iteration of all nodes */
             });
             return array;
         }
@@ -340,12 +341,28 @@
             }
         }
 
-        function isNumeric(num) {
-            return !isNaN(num) && isFinite(num);
+        function isNumber(value) {
+            return _typeOf(value) === _typeOf.number && !isNaN(value) && isFinite(value);
         }
 
-        function isFunction(fn) {
-            return _typeOf(fn) === _typeOf(function() {});
+        function isFunction(value) {
+            return _typeOf(value) === _typeOf.function;
         }
+    }
+
+    function typeOf() {
+        var typeOf, types, type;
+
+        types = {
+            function: function(){},
+            number: 0,
+            string: ''
+        };
+
+        typeOf = Function.call.bind(Object.prototype.toString);
+        for (type in types) {
+            typeOf[type] = typeOf(types[type]);
+        }
+        return typeOf;
     }
 });
